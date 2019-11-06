@@ -1,0 +1,16 @@
+.container{
+	background-color: gray;
+	color: #FFF;
+	width: 1140px;
+	height: 700px;
+}
+hr{
+	border-color: #fff;
+}
+a{
+	color: #fff;
+}
+.row-1{
+	width: 1140px;
+	height: 50px;
+}
