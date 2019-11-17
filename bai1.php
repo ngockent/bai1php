@@ -15,10 +15,10 @@
 	// var_dump('<pre>');
 	// var_dump(abc($con));
 	// var_dump('</pre>');
-	die;
+	// die;
 	?>
-	<form method="post">
-		<div class="container">
+	<form method="POST">
+		<div class="container bg-secondary ">
 			<div class="row-1">
 				<h1 name="id">Đặt vé máy bay</h1>
 			</div>
@@ -30,12 +30,12 @@
 						<?php
 						foreach (abc($con) as $key => $value) {
 							?>
-							<option><?php echo $value["diemdi"] ?></option><br>
+							<option><?php echo $value["DiemDi"] ?></option><br>
 						<?php } ?>
 					</select>
 					<br>
 					<lable class="col">Ngày đi</lable><br>
-					<input type="text" name="ngaydi" class="col-md-2" min="1" max="31" step="1" placeholder="1">
+					<input type="number" name="ngaydi" class="col-md-2" min="1" max="31" step="1" placeholder="1">
 					<input type="month" class="col-md-7" name="thangdi">
 				</div>
 				<div class="col-md-6">
@@ -44,12 +44,12 @@
 						<?php
 						foreach (abc($con) as $key => $value) {
 							?>
-							<option><?php echo $value['diemden']; ?></option>
+							<option><?php echo $value['DiemDen']; ?></option>
 						<?php } ?>
 					</select>
 					<br>
 					<label class="col-md-6">Ngày về</label><br>
-					<input type="text" class="col-md-2" name="ngayve" min="1" max="31" step="1" placeholder="1">
+					<input type="number" class="col-md-2" name="ngayve" min="1" max="31" step="1" placeholder="1">
 					<input type="month" class="col-md-7" name="thangve">
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 			</div>
 			<hr>
 			<div class="row">
-				<a href="#" class="col-md-6">Xem thêm hướng dẫn</a>
+				<a href="#" class="col-md-6" style="color:#fff">Xem thêm hướng dẫn</a>
 				<input type="submit" class="col-md-2 btn btn-primary" value="Mua Ngay" name="OK">
 			</div>
 		</div>
@@ -88,9 +88,17 @@
 			$dayout = $ngayve . ',' . $thangve;
 			$total = 2000000 * (int) ($nguoilon) + 2000000 * 25 / 100 * (int) ($treem) + 2000000 * 80 / 100 * ($embe);
 
-			$sqlselect = "Insert into datve(DiemDi,DiemDen,NgayDi,NgayVe,NguoiLon,TreEm,EmBe,TotalMoney)
+			if ($ngaydi >= 1 || $ngaydi <= 31 and $ngayve >= 1 || $ngayve <= 31) 
+			{
+				if ($nguoilon >= 1 || $nguoilon <= 10 and $treem >= 1 || $treem <= 10) 
+				{
+					$sqlselect = "Insert into datve(DiemDi,DiemDen,NgayDi,NgayVe,NguoiLon,TreEm,EmBe,TotalMoney)
 					values('$diemdi','$diemden','$dayin','$dayout','$nguoilon','$treem','$embe','$total')";
-			$exeInsert = mysqli_query($con, $sqlselect);
+					$exeInsert = mysqli_query($con, $sqlselect);
+				}
+			} else {
+				die();
+			}
 		}
 		?>
 	</form>
