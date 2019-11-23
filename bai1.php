@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 
@@ -69,6 +70,7 @@
 			<div class="row">
 				<a href="#" class="col-md-6" style="color:#fff">Xem thêm hướng dẫn</a>
 				<input type="submit" class="col-md-2 btn btn-primary" value="Mua Ngay" name="OK">
+				<input type="button" class="col-md-2 btn btn-primary" onclick="location='hienthi.php'"
 			</div>
 		</div>
 		<?php
@@ -83,6 +85,7 @@
 			$treem = $_POST['treem'];
 			$embe = $_POST['embe'];
 			$total = 0;
+			$user = $_SESSION['username'];
 
 			$dayin = $ngaydi . ',' . $thangdi;
 			$dayout = $ngayve . ',' . $thangve;
@@ -92,9 +95,10 @@
 			{
 				if ($nguoilon >= 1 || $nguoilon <= 10 and $treem >= 1 || $treem <= 10) 
 				{
-					$sqlselect = "Insert into datve(DiemDi,DiemDen,NgayDi,NgayVe,NguoiLon,TreEm,EmBe,TotalMoney)
-					values('$diemdi','$diemden','$dayin','$dayout','$nguoilon','$treem','$embe','$total')";
+					$sqlselect = "Insert into datve(username,DiemDi,DiemDen,NgayDi,NgayVe,NguoiLon,TreEm,EmBe,TotalMoney)
+					values('$user','$diemdi','$diemden','$dayin','$dayout','$nguoilon','$treem','$embe','$total')";
 					$exeInsert = mysqli_query($con, $sqlselect);
+					header('location:hienthi.php');
 				}
 			} else {
 				die();

@@ -1,20 +1,27 @@
 <?php
-	include 'connect.php';
+    include 'connect.php';
 
-	function vantintaikhoan(){
-		global $con;
-		$sql = "select * from diadiem ";
-		$exe = mysqli_query($con,$sql);
-		return $exe;
-	}
+    // function layThongTinTaiKhoan($stk){
+    //     global $con; 
+    //     $userInfoQuery = "select * from diadiem "; 
+    //     $execUserInfo = mysqli_query($con, $userInfoQuery); 
+    //     $num = mysqli_fetch_array($execUserInfo); 
+    //     return $num; 
+    // }
 
-	function laythongtindiemdi($exe)
-	{
-		global $con;
-		vantintaikhoan();
-		while ($num = mysqli_fetch_array($exe)) {
-			$num['DiemDi'];
-		}
-		return $num;
-	}
+    // function vanTin($stk){
+    //     $num = layThongTinTaiKhoan($stk); 
+    //     return $num['DiemDi'];
+    // }
+
+    function abc($con){
+        $sql = "SELECT * FROM `diadiem` WHERE id";
+        $exe = mysqli_query($con,$sql);
+        $a = [];
+        while($num = mysqli_fetch_array($exe, MYSQLI_ASSOC))
+        {
+            array_push($a,$num);
+        }
+        return $a;
+    }
 ?>
